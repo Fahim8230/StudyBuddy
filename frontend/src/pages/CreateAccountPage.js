@@ -24,7 +24,7 @@ const CreateAccountPage = () => {
 
     React.useEffect(() => {
         axios
-            .get("http://localhost:5000/states")
+            .get("http://127.0.0.1:5000/states")
             .then((response) => setStates(response.data))
             .catch((error) => console.error("Error", error));
     }, []);
@@ -32,7 +32,7 @@ const CreateAccountPage = () => {
     React.useEffect(() => {
         if (stateId) {
             axios
-                .get(`http://localhost:5000/universities/state/${stateId}`)
+                .get(`http://127.0.0.1:5000/universities/state/${stateId}`)
                 .then((response) => setUniversities(response.data))
                 .catch((error) => console.error("Error universities", error));
         } else {

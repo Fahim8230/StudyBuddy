@@ -15,9 +15,9 @@ CORS(app, supports_credentials=True)
 app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{os.path.join(os.getcwd(), "database.db")}'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SESSION_TYPE'] = 'filesystem'
-app.config['SESSION_FILE_DIR'] = '/sessions'
+app.config['SESSION_FILE_DIR'] = os.path.join(os.getcwd(), "sessions")
 app.config['SESSION_FILE_THRESHOLD'] = 500
-app.config['SESSION_CACHELIB'] = FileSystemCache(threshold=500, cache_dir="/sessions")
+app.config['SESSION_CACHELIB'] = FileSystemCache(threshold=500, cache_dir=os.path.join(os.getcwd(), "sessions"))
 app.config['SESSION_COOKIE_SAMESITE'] = 'None'
 app.config['SESSION_COOKIE_SECURE'] = False
 
@@ -30,7 +30,6 @@ app.register_blueprint(state_blueprint, url_prefix='/states')
 app.register_blueprint(university_blueprint, url_prefix='/universities')
 app.register_blueprint(course_blueprint, url_prefix='/courses')
 app.register_blueprint(enrollment_blueprint, url_prefix='/enrollments')
-
 
 def import_states():
     if len(state_controller.get_states()) > 0:

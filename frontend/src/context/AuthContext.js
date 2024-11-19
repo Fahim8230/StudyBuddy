@@ -15,7 +15,7 @@ export const AuthProvider = ({ children }) => {
     const checkAuthStatus = async () => {
         try {
             const response = await axios.get(
-                "http://localhost:5000/users/auth",
+                "http://127.0.0.1:5000/users/auth",
                 { withCredentials: true }
             );
             if (response.status === 200 && response.data.auth) {
@@ -35,7 +35,7 @@ export const AuthProvider = ({ children }) => {
     const createAccount = async (data) => {
         try {
             const response = await axios.post(
-                "http://localhost:5000/users/create-user",
+                "http://127.0.0.1:5000/users/create-user",
                 data,
                 { withCredentials: true }
             );
@@ -53,7 +53,7 @@ export const AuthProvider = ({ children }) => {
     const login = async (credentials) => {
         try {
             const response = await axios.post(
-                "http://localhost:5000/users/login",
+                "http://127.0.0.1:5000/users/login",
                 credentials,
                 { withCredentials: true }
             );
@@ -71,7 +71,7 @@ export const AuthProvider = ({ children }) => {
     const logout = async () => {
         try {
             const response = await axios.post(
-                "http://localhost:5000/users/logout",
+                "http://127.0.0.1:5000/users/logout",
                 {},
                 { withCredentials: true }
             );

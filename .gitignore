@@ -1,0 +1,12 @@
+.DS_Store
+.env
+
+#node
+node_modules/
+build/
+
+#python
+__pycache__/
+*.pyc
+*.sqlite
+*.db
