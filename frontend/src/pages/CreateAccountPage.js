@@ -12,15 +12,18 @@ const CreateAccountPage = () => {
     const [universityId, setUniversityId] = React.useState("");
     const [states, setStates] = React.useState([]);
     const [universities, setUniversities] = React.useState([]);
-    const { isAuthenticated, createAccount } = React.useContext(AuthContext);
+    const { isAuthenticated, createAccount, authChecked } = React.useContext(AuthContext);
     const navigate = useNavigate();
 
     React.useEffect(() => {
+        if (!authChecked) {
+            return;
+        }
         if (isAuthenticated) {
             console.log("Navigating to home page");
             navigate("/");
         }
-    }, [isAuthenticated, navigate]);
+    }, [isAuthenticated, navigate, authChecked]);
 
     React.useEffect(() => {
         axios
@@ -39,6 +42,10 @@ const CreateAccountPage = () => {
             setUniversities([]);
         }
     }, [stateId]);
+
+    if(!authChecked) {
+        return null;
+    }
 
     const handleSubmit = (e) => {
         e.preventDefault();

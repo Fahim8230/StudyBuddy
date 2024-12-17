@@ -12,6 +12,13 @@ def verify_password(input_password, user):
     hashed_input = hashpw(input_password.encode('utf-8'), stored_salt)
     return hashed_input == user.password.encode('utf-8')
 
+def update_password(new_password, user):
+    hashed_password, salt = encrypt_password(new_password)
+    user.password = hashed_password.decode('utf-8')
+    user.salt = salt.decode('utf-8')
+    db.session.commit()
+    return True
+
 def create_user(data):
     existing_user = User.query.filter_by(email=data['email']).first()
     if existing_user:

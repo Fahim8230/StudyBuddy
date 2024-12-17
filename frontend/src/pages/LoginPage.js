@@ -6,14 +6,17 @@ import AuthContext from "../context/AuthContext";
 const LoginPage = () => {
     const [email, setEmail] = React.useState("");
     const [password, setPassword] = React.useState("");
-    const { isAuthenticated, login } = React.useContext(AuthContext);
+    const { isAuthenticated, login, authChecked } = React.useContext(AuthContext);
     const navigate = useNavigate();
 
     React.useEffect(() => {
+        if (!authChecked) {
+            return;
+        }
         if (isAuthenticated) {
             navigate("/");
         }
-    }, [isAuthenticated, navigate]);
+    }, [isAuthenticated, navigate, authChecked]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -24,6 +27,10 @@ const LoginPage = () => {
     const handleCreateAccount = () => {
         navigate("/create-account");
     };
+
+    if (!authChecked) {
+        return null;
+    }
 
     return (
         <Container fluid="md">
